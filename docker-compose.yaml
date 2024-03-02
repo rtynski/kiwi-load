@@ -1,1 +1,10 @@
-version: "3"
+version: '3.8'
+
+services:
+  kiwiload_api:
+    build:
+      context: .
+      dockerfile: src/KiwiLoad.Api/Dockerfile
+    ports:
+      - "8080:8080"
+      - "8081:8081"

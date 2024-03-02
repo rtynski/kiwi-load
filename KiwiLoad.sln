@@ -1,0 +1,71 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KiwiLoad.Api", "src\KiwiLoad.Api\KiwiLoad.Api.csproj", "{384975BD-64F1-4A91-907B-E5420BCFED6D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{3B1CFAB9-8575-419B-B6B2-F87CE20BC390}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{E97D9ED7-6DFE-4B61-BC1D-148406F717B2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KiwiLoad.Application", "src\KiwiLoad.Application\KiwiLoad.Application.csproj", "{9C704100-3924-49F4-AE7B-DFBB37CCF796}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KiwiLoad.Infrastructure", "src\KiwiLoad.Infrastructure\KiwiLoad.Infrastructure.csproj", "{6D4C8B99-367B-476C-A11F-5F494C7BC591}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KiwiLoad.Core", "src\KiwiLoad.Core\KiwiLoad.Core.csproj", "{4719C0D6-D470-41E4-883B-6430BD2CCB5B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sln", "sln", "{BF992699-1757-42DA-98B6-B5EDE7685CA1}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		docker-compose.yaml = docker-compose.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "rest", "rest", "{0B51E346-32A7-442F-A4BD-D7A7A04C0129}"
+	ProjectSection(SolutionItems) = preProject
+		rest\KiwiLoad.Api.http = rest\KiwiLoad.Api.http
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KiwiLoad.Api.Tests", "tests\KiwiLoad.Api.Tests\KiwiLoad.Api.Tests.csproj", "{3F37EB60-648A-4864-A42C-6700DA90F64D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{384975BD-64F1-4A91-907B-E5420BCFED6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{384975BD-64F1-4A91-907B-E5420BCFED6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{384975BD-64F1-4A91-907B-E5420BCFED6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{384975BD-64F1-4A91-907B-E5420BCFED6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C704100-3924-49F4-AE7B-DFBB37CCF796}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C704100-3924-49F4-AE7B-DFBB37CCF796}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C704100-3924-49F4-AE7B-DFBB37CCF796}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C704100-3924-49F4-AE7B-DFBB37CCF796}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D4C8B99-367B-476C-A11F-5F494C7BC591}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D4C8B99-367B-476C-A11F-5F494C7BC591}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D4C8B99-367B-476C-A11F-5F494C7BC591}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D4C8B99-367B-476C-A11F-5F494C7BC591}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4719C0D6-D470-41E4-883B-6430BD2CCB5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4719C0D6-D470-41E4-883B-6430BD2CCB5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4719C0D6-D470-41E4-883B-6430BD2CCB5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4719C0D6-D470-41E4-883B-6430BD2CCB5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F37EB60-648A-4864-A42C-6700DA90F64D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F37EB60-648A-4864-A42C-6700DA90F64D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F37EB60-648A-4864-A42C-6700DA90F64D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F37EB60-648A-4864-A42C-6700DA90F64D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{384975BD-64F1-4A91-907B-E5420BCFED6D} = {3B1CFAB9-8575-419B-B6B2-F87CE20BC390}
+		{9C704100-3924-49F4-AE7B-DFBB37CCF796} = {3B1CFAB9-8575-419B-B6B2-F87CE20BC390}
+		{6D4C8B99-367B-476C-A11F-5F494C7BC591} = {3B1CFAB9-8575-419B-B6B2-F87CE20BC390}
+		{4719C0D6-D470-41E4-883B-6430BD2CCB5B} = {3B1CFAB9-8575-419B-B6B2-F87CE20BC390}
+		{3F37EB60-648A-4864-A42C-6700DA90F64D} = {E97D9ED7-6DFE-4B61-BC1D-148406F717B2}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D930B292-C27E-4FFE-B6BD-E01B95B0F72F}
+	EndGlobalSection
+EndGlobal
