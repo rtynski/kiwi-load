@@ -1,0 +1,5 @@
+@url = https://localhost:7090
+
+GET {{url}}/api/warehouses/v1
+Accept: application/json
+
