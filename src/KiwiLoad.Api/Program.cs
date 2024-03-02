@@ -1,36 +1,17 @@
-using KiwiLoad.Application;
-using KiwiLoad.Infrastructure;
+namespace KiwiLoad.Api;
 
-
-var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-
-builder
-    .Services
-    .AddControllers();
-
-builder
-    .Services
-    .AddApplication()
-    .AddInfrastructure();
-
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+class Program
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    static void Main(string[] args)
+    {
+
+        CreateHostBuilder(args).Build().Run();
+    }
+
+    public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseStartup<Startup>();
+                });
 }
-
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
-app.MapControllers();
-
-app.Run();

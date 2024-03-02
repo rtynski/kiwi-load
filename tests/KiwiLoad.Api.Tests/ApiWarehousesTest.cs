@@ -1,12 +1,43 @@
-namespace KiwiLoad.Api.Tests;
-#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
-public class ApiWarehousesTest
-{
-    [Fact]
+using FluentAssertions;
+using KiwiLoad.Api.Controllers.Warehouses.GetWarehouses.V1.Models;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.TestHost;
+using Newtonsoft.Json;
+using System.Net;
 
-    public async Task When_HttpGet_Should_ReturnCollectionOfWarehouses()
+namespace KiwiLoad.Api.Tests;
+
+public class WarehousesControllerTests
+{
+    private readonly TestServer _server;
+    private readonly HttpClient _client;
+
+    public WarehousesControllerTests()
     {
-        Assert.True(false);
+        // Arrange
+        var testServer = new WebHostBuilder()
+            .UseEnvironment("Development")
+            .UseStartup<Startup>();
+        _server = new TestServer(testServer);
+        _client = _server.CreateClient();
+    }
+
+    [Fact]
+    public async Task GetWarehousesV1_Should_ReturnCollectionOfWarehouses()
+    {
+        // Arrange
+        var request = "/api/warehouses/v1";
+
+        // Act
+        var response = await _client.GetAsync(request);
+
+        // Assert
+        response.EnsureSuccessStatusCode(); // Status Code 200-299
+        var stringResponse = await response.Content.ReadAsStringAsync();
+        var warehouses = JsonConvert.DeserializeObject<WarehouseRes[]>(stringResponse);
+
+        response.StatusCode.Should().Be(HttpStatusCode.OK);
+        warehouses.Should().NotBeNull();
+        warehouses!.Length.Should().Be(5);
     }
 }
-#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously

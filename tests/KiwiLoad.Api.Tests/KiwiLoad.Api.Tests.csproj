@@ -10,6 +10,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="coverlet.msbuild" Version="6.0.1">
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+			<PrivateAssets>all</PrivateAssets>
+		</PackageReference>
 		<PackageReference Include="FluentAssertions" Version="6.12.0" />
 		<PackageReference Include="Microsoft.AspNetCore.TestHost" Version="8.0.2" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
@@ -26,7 +30,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\src\KiwiLoad.Api\KiwiLoad.Api.csproj" />
+		<ProjectReference Include="..\..\src\KiwiLoad.Api\KiwiLoad.Api.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -36,5 +40,4 @@
 	<ItemGroup>
 		<Using Include="Xunit" />
 	</ItemGroup>
-
 </Project>
