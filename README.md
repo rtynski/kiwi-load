@@ -1,4 +1,5 @@
 # Kiwi Load
+[![codecov](https://codecov.io/gh/rtynski/kiwi-load/graph/badge.svg?token=3URZFOZ7G1)](https://codecov.io/gh/rtynski/kiwi-load)
 ## Problem
 W erze dynamicznego rozwoju technologicznego oraz rosnących wymagań rynkowych, znalezienie odpowiednich narzędzi staje się niezwykle trudnym zadaniem. W tym kontekście warto przyjrzeć się inspiracji, jaką stanowi "Kiwi Load". Nazwa ta doskonale odzwierciedla sedno inicjatywy - stanowi symboliczny odnośnik zarówno do owoców pracy, jak i głównego celu projektu.
 
@@ -21,3 +22,8 @@ Jednostką bazową będzie kontener.
 * .NET, WebApi, C# - stają się bazową technologią dla projektu
 * SqlServer - aktualnie jest dla mnie pierwszym wyborem (Zastanawiam się na Postgres, Redis)
 * Monorepo - aktualnie cały projekt będzie rozwijany jako monorepo
+## Pokrycie testami
+<p align="center" width="100%">
+    <img width="50%" src="https://codecov.io/gh/rtynski/kiwi-load/graphs/tree.svg?token=3URZFOZ7G1" alt="Pokrycie testami" />
+</p>
+
