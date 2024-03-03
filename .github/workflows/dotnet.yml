@@ -1,6 +1,4 @@
 # This workflow will build a .NET project
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
-
 name: .NET
 
 on:
@@ -26,8 +24,12 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
     - name: Upload coverage reports to Codecov
-      uses: codecov/codecov-action@v4.0.1
-      if: github.ref == 'refs/heads/main'
-      with:
-        token: ${{ secrets.CODECOV_TOKEN }}
-        slug: rtynski/kiwi-load
+      if: github.event_name == 'push'
+      shell: bash
+      run: |
+        curl -Os https://uploader.codecov.io/latest/linux/codecov 
+        chmod +x codecov
+        ref="${{ github.ref }}"
+        branch=${ref#refs/heads/}
+        echo $branch
+        ./codecov -b $branch -f ./tests/KiwiLoad.Api.Tests/coverage.opencover.xml -t ${{ secrets.CODECOV_TOKEN }}
