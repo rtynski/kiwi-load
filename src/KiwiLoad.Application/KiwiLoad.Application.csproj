@@ -16,4 +16,8 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\KiwiLoad.Core\KiwiLoad.Core.csproj" />
+	</ItemGroup>
+
 </Project>

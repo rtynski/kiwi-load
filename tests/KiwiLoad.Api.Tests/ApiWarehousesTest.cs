@@ -23,12 +23,27 @@ public class WarehousesControllerTests
     }
 
     [Fact]
+    public async Task GetWarehousesV1NoAuth_Should_ReturnNoAuth()
+    {
+        // Arrange
+        var request = "/api/warehouses/v1";
+
+        // Act
+        var response = await _client.GetAsync(request);
+
+        // Assert
+        response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
+    }
+
+    [Fact]
     public async Task GetWarehousesV1_Should_ReturnCollectionOfWarehouses()
     {
         // Arrange
         var request = "/api/warehouses/v1";
 
         // Act
+        // add barer token
+        _client.DefaultRequestHeaders.Add("Authorization", "test_token");
         var response = await _client.GetAsync(request);
 
         // Assert
