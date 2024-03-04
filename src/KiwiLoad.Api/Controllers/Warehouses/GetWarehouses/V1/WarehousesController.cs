@@ -1,4 +1,5 @@
 using KiwiLoad.Api.Controllers.Warehouses.GetWarehouses.V1.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KiwiLoad.Appi.Controllers;
@@ -6,6 +7,7 @@ namespace KiwiLoad.Appi.Controllers;
 public partial class WarehousesController
 {
     [HttpGet("v1")]
+    [Authorize]
     public IEnumerable<WarehouseRes> GetWarehousesV1()
     {
         logger.LogInformation("{HttpMethod} {ActionName}","GET", nameof(GetWarehousesV1));
