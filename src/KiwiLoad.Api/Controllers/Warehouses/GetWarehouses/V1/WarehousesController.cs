@@ -1,4 +1,5 @@
 using KiwiLoad.Api.Controllers.Warehouses.GetWarehouses.V1.Models;
+using KiwiLoad.Core.Areas.Warehouses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,9 +9,10 @@ public partial class WarehousesController
 {
     [HttpGet("v1")]
     [Authorize]
-    public IEnumerable<WarehouseRes> GetWarehousesV1()
+    public async Task<IEnumerable<WarehouseRes>> GetWarehousesV1([FromServices] IWarehousesService warehousesService)
     {
         logger.LogInformation("{HttpMethod} {ActionName}","GET", nameof(GetWarehousesV1));
-        return Enumerable.Range(1, 5).Select(index => new WarehouseRes(index)).ToArray();
+        var warehouses = await warehousesService.GetAll();
+        return warehouses.Items.Select(x => new WarehouseRes(x.Id));
     }
 }
