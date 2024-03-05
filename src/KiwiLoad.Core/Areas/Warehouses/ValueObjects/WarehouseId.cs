@@ -11,7 +11,7 @@ public class WarehouseId
 
     public WarehouseId(int value)
     {
-        if (value < 0)
+        if (value <= 0)
         {
             throw new KiwiLoadWarehousesInvalidIdException(value);
         }
@@ -19,9 +19,7 @@ public class WarehouseId
         Value = value;
     }
 
-    public static implicit operator int(WarehouseId licencePlate)
-        => licencePlate.Value;
+    public static implicit operator int(WarehouseId warehouse) => warehouse.Value;
 
-    public static implicit operator WarehouseId(int value)
-        => new(value);
+    public static implicit operator WarehouseId(int value) => new(value);
 }
