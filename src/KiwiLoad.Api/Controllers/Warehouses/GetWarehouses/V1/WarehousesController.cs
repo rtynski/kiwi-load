@@ -1,4 +1,4 @@
-using KiwiLoad.Api.Controllers.Warehouses.GetWarehouses.V1.Models;
+using KiwiLoad.Api.Controllers.Warehouses.Models;
 using KiwiLoad.Core.Areas.Warehouses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

@@ -3,16 +3,20 @@ using KiwiLoad.Core;
 using KiwiLoad.Core.Authentication;
 using KiwiLoad.Infrastructure;
 using Microsoft.AspNetCore.Authentication;
+using KiwiLoad.Infrastructure.Errors;
 
 namespace KiwiLoad.Api;
 
 public class Startup
 {
+    private const string TokenScheme = nameof(TokenScheme);
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddAuthentication("TokenScheme")
-                .AddScheme<AuthenticationSchemeOptions, TokenAuthenticationHandler>("TokenScheme", options => { });
+        services
+            .AddAuthentication(TokenScheme)
+            .AddScheme<AuthenticationSchemeOptions, TokenAuthenticationHandler>(TokenScheme, options => { });
 
+        services.AddErrorHandler();
 
         services.AddControllers();
 
@@ -30,6 +34,7 @@ public class Startup
             app.UseDeveloperExceptionPage();
         }
 
+        app.UseErrorHandler();
 
         app.UseHttpsRedirection();
         app.UseRouting();

@@ -11,6 +11,12 @@ internal class WarehousesService : IWarehousesService
         this.warehouseRepository=warehouseRepository;
     }
 
+    public async Task<WarehouseDto> Create(WarehouseCreateDto warehouse)
+    {
+        var newWarehouse = await warehouseRepository.Create(warehouse);
+        return new WarehouseDto(newWarehouse.Id);
+    }
+
     public async Task<WarehouseListDto> GetAll()
     {
         var warehouses = await warehouseRepository.GetAll();

@@ -1,9 +1,10 @@
 using FluentAssertions;
-using KiwiLoad.Api.Controllers.Warehouses.GetWarehouses.V1.Models;
+using KiwiLoad.Api.Controllers.Warehouses.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Newtonsoft.Json;
 using System.Net;
+using System.Text;
 
 namespace KiwiLoad.Api.Tests;
 
@@ -54,5 +55,30 @@ public class WarehousesControllerTests
         response.StatusCode.Should().Be(HttpStatusCode.OK);
         warehouses.Should().NotBeNull();
         warehouses!.Length.Should().Be(5);
+    }
+
+
+    [Fact]
+    public async Task PostWarehousesV1_Should_ReturnWarehouseCreated()
+    {
+        // Arrange
+        var request = new HttpRequestMessage(HttpMethod.Post, "/api/warehouses/v1");
+
+        // Act
+        // add barer token
+        _client.DefaultRequestHeaders.Add("Authorization", "test_token");
+        // Arrange
+        var warehouse = new WarehouseReq { /* set properties here */ };
+        request.Content = new StringContent(JsonConvert.SerializeObject(warehouse), Encoding.UTF8, "application/json");
+        var response = await _client.SendAsync(request);
+
+        // Assert
+        response.EnsureSuccessStatusCode(); // Status Code 200-299
+        var stringResponse = await response.Content.ReadAsStringAsync();
+        var warehouses = JsonConvert.DeserializeObject<WarehouseRes>(stringResponse);
+
+        response.StatusCode.Should().Be(HttpStatusCode.OK);
+        warehouses.Should().NotBeNull();
+        warehouses!.Id.Should().Be(6);
     }
 }
