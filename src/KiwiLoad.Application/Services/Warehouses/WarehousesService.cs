@@ -1,5 +1,6 @@
 ﻿using KiwiLoad.Core.Areas.Warehouses;
 using KiwiLoad.Core.Areas.Warehouses.DTO;
+using KiwiLoad.Core.Areas.Warehouses.ValueObjects;
 
 namespace KiwiLoad.Application.Services.Warehouses;
 internal class WarehousesService : IWarehousesService
@@ -21,5 +22,15 @@ internal class WarehousesService : IWarehousesService
     {
         var warehouses = await warehouseRepository.GetAll();
         return new WarehouseListDto(warehouses);
+    }
+
+    public async Task<WarehouseDto?> GetById(WarehouseId id)
+    {
+        if(id > 10)
+        {
+            return null;
+        }
+        var warehouse = await warehouseRepository.GetById(id);
+        return warehouse;
     }
 }
