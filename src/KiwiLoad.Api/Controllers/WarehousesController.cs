@@ -6,5 +6,4 @@ namespace KiwiLoad.Appi.Controllers;
 [Route("api/warehouses")]
 public partial class WarehousesController(ILogger<WarehousesController> logger) : ControllerBase
 {
-    private readonly ILogger<WarehousesController> logger = logger;
 }
