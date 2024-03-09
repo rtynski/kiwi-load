@@ -5,10 +5,11 @@ namespace KiwiLoad.Appi.Controllers;
 
 public partial class AuthController
 {
-    [HttpPost("logout")]
-    public async Task<ActionResult<LogoutRes>> Logout()
+    [HttpPost("v1/logout")]
+    public async Task<ActionResult<LogoutRes>> LogoutV1()
     {
         await Task.Yield();
+        logger.LogInformation("{HttpMethod} {ActionName}", "POST", nameof(LogoutV1));
         return Ok(new LogoutRes("token"));
     }
 }
