@@ -1,4 +1,5 @@
-﻿using KiwiLoad.Core.Exceptions.Warehouses;
+﻿using KiwiLoad.Core.Exceptions.Auth;
+using KiwiLoad.Core.Exceptions.Warehouses;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System.Net;
@@ -32,6 +33,8 @@ internal class ErrorHandlerMiddleware(ILogger<ErrorHandlerMiddleware> logger) : 
         => exception switch
         {
             KiwiLoadWarehousesInvalidIdException ex => (new Error(GetErrorCode(ex), ex.Message), HttpStatusCode.BadRequest),
+            KiwiLoadAuthUsernameEmptyException ex => (new Error(GetErrorCode(ex), ex.Message), HttpStatusCode.Unauthorized),
+            KiwiLoadAuthPasswordEmptyException ex => (new Error(GetErrorCode(ex), ex.Message), HttpStatusCode.Unauthorized),
             _ => (new Error("error", "There was an error."), HttpStatusCode.InternalServerError)
         };
 
