@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using System.Net;
+using System.Text;
 
 namespace KiwiLoad.Api.Tests.Auth;
 public class LogoutTest
@@ -22,15 +23,31 @@ public class LogoutTest
     
 
     [Fact]
-    public async Task LogoutV1WithoutKey_Should_ReturnUnauthorized()
+    public async Task V1_Should_NoAuthorize()
     {
         // Arrange
         var request = new HttpRequestMessage(HttpMethod.Post, BaseUrl);
+
         // Act
         request.Content = new StringContent(string.Empty);
         var response = await client.SendAsync(request);
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
+    }
+
+    [Fact]
+    public async Task V1_Should_Logout()
+    {
+        // Arrange
+        var request = new HttpRequestMessage(HttpMethod.Post, BaseUrl);
+
+        // Act
+        client.DefaultRequestHeaders.Add("Authorization", "test_token");
+        request.Content = new StringContent("{}", Encoding.UTF8, Mt.Json);
+        var response = await client.SendAsync(request);
+
+        // Assert
+        response.StatusCode.Should().Be(HttpStatusCode.OK);
     }
 }

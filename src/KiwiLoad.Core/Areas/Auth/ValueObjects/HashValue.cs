@@ -44,4 +44,13 @@ public class HashValue : IEquatable<HashValue>
     {
         return new HashValue(value);
     }
+    public static bool operator ==(HashValue left, HashValue right)
+    {
+        return left.Equals(right);
+    }
+    public static bool operator !=(HashValue left, HashValue right)
+    {
+        return !left.Equals(right);
+    }
+
 }

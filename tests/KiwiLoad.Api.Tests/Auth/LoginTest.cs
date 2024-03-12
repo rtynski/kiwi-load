@@ -58,4 +58,41 @@ public class LoginTest
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
     }
+
+    [Fact]
+    public async Task V1WrongPassword_Should_Authorized()
+    {
+        // Arrange
+        var request = new HttpRequestMessage(HttpMethod.Post, BaseUrl);
+
+        // Act
+        var login = new LoginReq()
+        {
+            Username = "Test",
+            Password = "Test"
+        };
+        request.Content = new StringContent(JsonConvert.SerializeObject(login), Encoding.UTF8, Mt.Json);
+        var response = await client.SendAsync(request);
+
+        // Assert
+        response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
+    }
+    [Fact]
+    public async Task V1_Should_Authorized()
+    {
+        // Arrange
+        var request = new HttpRequestMessage(HttpMethod.Post, BaseUrl);
+
+        // Act
+        var login = new LoginReq()
+        {
+            Username = "Test",
+            Password = "Password"
+        };
+        request.Content = new StringContent(JsonConvert.SerializeObject(login), Encoding.UTF8, Mt.Json);
+        var response = await client.SendAsync(request);
+
+        // Assert
+        response.StatusCode.Should().Be(HttpStatusCode.OK);
+    }
 }
