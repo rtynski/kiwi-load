@@ -5,7 +5,7 @@ public class Password : IEquatable<Password>
 {
     public string Value { get; }
 
-    public Password(string value)
+    public Password(string? value)
     {
         if (value is null || string.IsNullOrWhiteSpace(value))
         {
@@ -27,7 +27,7 @@ public class Password : IEquatable<Password>
     {
         if (obj is null)
             return false;
-        return Equals(obj);
+        return Equals(obj as Password);
     }
 
     public override int GetHashCode()

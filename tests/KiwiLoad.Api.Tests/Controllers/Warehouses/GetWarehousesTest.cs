@@ -4,16 +4,15 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Newtonsoft.Json;
 using System.Net;
-using System.Text;
 
-namespace KiwiLoad.Api.Tests.Warehouses;
-public class CreateWarehouseTest
+namespace KiwiLoad.Api.Tests.Controller.Warehouses;
+public class GetWarehousesTest
 {
     private const string BaseUrl = "/api/warehouses/v1";
     private readonly TestServer server;
     private readonly HttpClient client;
 
-    public CreateWarehouseTest()
+    public GetWarehousesTest()
     {
         var testServer = new WebHostBuilder()
             .UseEnvironment("Development")
@@ -23,25 +22,36 @@ public class CreateWarehouseTest
     }
 
     [Fact]
-    public async Task V1_Should_ReturnWarehouseCreated()
+    public async Task V1NoAuth_Should_ReturnNoAuth()
     {
         // Arrange
-        var request = new HttpRequestMessage(HttpMethod.Post, BaseUrl);
+        var request = new HttpRequestMessage(HttpMethod.Get, BaseUrl);
+
+        // Act
+        var response = await client.SendAsync(request);
+
+        // Assert
+        response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
+    }
+
+    [Fact]
+    public async Task V1_Should_ReturnCollectionOfWarehouses()
+    {
+        // Arrange
+        var request = new HttpRequestMessage(HttpMethod.Get, BaseUrl);
 
         // Act
         client.DefaultRequestHeaders.Add("Authorization", "test_token");
-        var warehouse = new WarehouseReq { };
-        request.Content = new StringContent(JsonConvert.SerializeObject(warehouse), Encoding.UTF8, Mt.Json);
         var response = await client.SendAsync(request);
 
         // Assert
         response.EnsureSuccessStatusCode();
 
         var stringResponse = await response.Content.ReadAsStringAsync();
-        var warehouses = JsonConvert.DeserializeObject<WarehouseRes>(stringResponse);
+        var warehouses = JsonConvert.DeserializeObject<WarehouseRes[]>(stringResponse);
 
         response.StatusCode.Should().Be(HttpStatusCode.OK);
         warehouses.Should().NotBeNull();
-        warehouses!.Id.Should().Be(6);
+        warehouses!.Length.Should().Be(5);
     }
 }

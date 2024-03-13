@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 using System.Net;
 using System.Text;
 
-namespace KiwiLoad.Api.Tests.Auth;
+namespace KiwiLoad.Api.Tests.Controller.Auth;
 public class LoginTest
 {
     private const string BaseUrl = "/api/auth/v1/login";

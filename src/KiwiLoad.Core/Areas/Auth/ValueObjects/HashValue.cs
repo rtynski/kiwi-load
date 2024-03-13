@@ -5,7 +5,7 @@ public class HashValue : IEquatable<HashValue>
 {
     public string Value { get; }
 
-    public HashValue(string value)
+    public HashValue(string? value)
     {
         if (value is null || string.IsNullOrWhiteSpace(value))
         {

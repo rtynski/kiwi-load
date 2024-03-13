@@ -5,7 +5,7 @@ public class Token : IEquatable<Token>
 {
     public string Value { get; }
 
-    public Token(string value)
+    public Token(string? value)
     {
         if (string.IsNullOrWhiteSpace(value))
         {
