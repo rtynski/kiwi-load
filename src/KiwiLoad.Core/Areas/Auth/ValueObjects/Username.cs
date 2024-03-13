@@ -5,7 +5,7 @@ public class Username : IEquatable<Username>
 {
     public string Value { get; }
 
-    public Username(string value)
+    public Username(string? value)
     {
         if (string.IsNullOrWhiteSpace(value))
         {

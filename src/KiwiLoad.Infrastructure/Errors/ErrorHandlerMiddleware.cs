@@ -35,6 +35,8 @@ internal class ErrorHandlerMiddleware(ILogger<ErrorHandlerMiddleware> logger) : 
             KiwiLoadWarehousesInvalidIdException ex => (new Error(GetErrorCode(ex), ex.Message), HttpStatusCode.BadRequest),
             KiwiLoadAuthUsernameEmptyException ex => (new Error(GetErrorCode(ex), ex.Message), HttpStatusCode.Unauthorized),
             KiwiLoadAuthPasswordEmptyException ex => (new Error(GetErrorCode(ex), ex.Message), HttpStatusCode.Unauthorized),
+            // Abstract class 
+            KiwiLoadAuthException ex => (new Error(GetErrorCode(ex), ex.Message), HttpStatusCode.InternalServerError),
             _ => (new Error("error", "There was an error."), HttpStatusCode.InternalServerError)
         };
 
