@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.TestHost;
 using Newtonsoft.Json;
 using System.Net;
 
-namespace KiwiLoad.Api.Tests.Warehouses;
+namespace KiwiLoad.Api.Tests.Controller.Warehouses;
 public class GetWarehouseByIdTest
 {
     private const string BaseUrl = "/api/warehouses/v1";

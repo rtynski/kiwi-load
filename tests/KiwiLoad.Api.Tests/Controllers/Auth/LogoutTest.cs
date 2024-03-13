@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.TestHost;
 using System.Net;
 using System.Text;
 
-namespace KiwiLoad.Api.Tests.Auth;
+namespace KiwiLoad.Api.Tests.Controller.Auth;
 public class LogoutTest
 {
     private const string BaseUrl = "/api/auth/v1/logout";
@@ -20,7 +20,7 @@ public class LogoutTest
         client = server.CreateClient();
     }
 
-    
+
 
     [Fact]
     public async Task V1_Should_NoAuthorize()
