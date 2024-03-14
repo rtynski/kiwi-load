@@ -57,10 +57,12 @@ public class HashValueTest
         var hashValue2 = new HashValue("hashValue");
 
         // Act
-        var result = hashValue1.Equals(hashValue2);
+        var resultTyp = hashValue1.Equals(hashValue2);
+        var resultObj = hashValue1.Equals((object)hashValue2);
 
         // Assert
-        result.Should().BeTrue();
+        resultTyp.Should().BeTrue();
+        resultObj.Should().BeTrue();
         hashValue1.Value.Should().Be(hashValue2.Value);
     }
     [Fact]
@@ -71,11 +73,54 @@ public class HashValueTest
         var hashValue2 = new HashValue("hashValue2");
 
         // Act
-        var result = hashValue1.Equals(hashValue2);
+        var resultTyp = hashValue1.Equals(hashValue2);
+        var resultObj = hashValue1.Equals((object)hashValue2);
 
         // Assert
-        result.Should().BeFalse();
+        resultTyp.Should().BeFalse();
+        resultObj.Should().BeFalse();
         hashValue1.Value.Should().NotBe(hashValue2.Value);
     }
     
+    [Fact]
+    public void HashValueEqualsNull_Should_BeFalse()
+    {
+        // Arrange
+        var hashValue1 = new HashValue("hashValue1");
+        HashValue? hashValue2 = null;
+        object? hashValue3 = null;
+        // Act
+        var resultTyp = hashValue1.Equals(hashValue2);
+        var resultObj = hashValue1.Equals(hashValue3);
+
+        // Assert
+        resultTyp.Should().BeFalse();
+        resultObj.Should().BeFalse();
+    }
+    [Fact]
+    public void HashValueGetHashCode_Should_BeEqual()
+    {
+        // Arrange
+        var hashValue1 = new HashValue("hashValue");
+        var hashValue2 = new HashValue("hashValue");
+
+        // Act
+        var result = hashValue1.GetHashCode() == hashValue2.GetHashCode();
+
+        // Assert
+        result.Should().BeTrue();
+    }
+    
+    [Fact]
+    public void HashValueImplicitOperatorToString_Should_BeEqual()
+    {
+        // Arrange
+        var hashValue = new HashValue("hashValue");
+
+        // Act
+        var result = (string)hashValue;
+
+        // Assert
+        result.Should().Be(hashValue.Value);
+    }
 }

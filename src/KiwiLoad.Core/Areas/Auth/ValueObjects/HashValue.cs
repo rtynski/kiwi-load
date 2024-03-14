@@ -27,7 +27,7 @@ public class HashValue : IEquatable<HashValue>
     {
         if (obj is null)
             return false;
-        return Equals(obj);
+        return Equals(obj as HashValue);
     }
 
     public override int GetHashCode()
