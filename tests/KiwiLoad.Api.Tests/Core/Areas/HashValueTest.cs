@@ -6,7 +6,7 @@ namespace KiwiLoad.Api.Tests.Core.Areas;
 public class HashValueTest
 {
     [Fact]
-    public void HashValueWhenEmpty_Should_GetExceptions()
+    public void WhenEmpty_Should_GetExceptions()
     {
         // Arrange
         var hashValue = string.Empty;
@@ -22,7 +22,7 @@ public class HashValueTest
     }
 
     [Fact]
-    public void HashValueWhenNull_Should_GetExceptions()
+    public void WhenNull_Should_GetExceptions()
     {
         // Arrange
         string? hashValue = null;
@@ -38,7 +38,7 @@ public class HashValueTest
     }
 
     [Fact]
-    public void HashValueNotNull_Should_NoException()
+    public void WhenNotNull_Should_NoException()
     {
         // Arrange
         var hashValue = "hashValue";
@@ -49,8 +49,9 @@ public class HashValueTest
         // Assert
         exception.Should().BeNull();
     }
+
     [Fact]
-    public void HashValueEquals_Should_BeTrue()
+    public void WhenTheSameEquals_Should_BeTrue()
     {
         // Arrange
         var hashValue1 = new HashValue("hashValue");
@@ -65,8 +66,9 @@ public class HashValueTest
         resultObj.Should().BeTrue();
         hashValue1.Value.Should().Be(hashValue2.Value);
     }
+
     [Fact]
-    public void HashValueEquals_Should_BeFalse()
+    public void WhenNotTheSameEquals_Should_BeFalse()
     {
         // Arrange
         var hashValue1 = new HashValue("hashValue1");
@@ -79,14 +81,13 @@ public class HashValueTest
         // Assert
         resultTyp.Should().BeFalse();
         resultObj.Should().BeFalse();
-        hashValue1.Value.Should().NotBe(hashValue2.Value);
     }
     
     [Fact]
-    public void HashValueEqualsNull_Should_BeFalse()
+    public void WhenOneNull_Should_BeFalse()
     {
         // Arrange
-        var hashValue1 = new HashValue("hashValue1");
+        var hashValue1 = new HashValue("hashValue");
         HashValue? hashValue2 = null;
         object? hashValue3 = null;
         // Act
@@ -97,22 +98,41 @@ public class HashValueTest
         resultTyp.Should().BeFalse();
         resultObj.Should().BeFalse();
     }
+
     [Fact]
-    public void HashValueGetHashCode_Should_BeEqual()
+    public void WhenCompare_Should_BeTrue()
     {
         // Arrange
         var hashValue1 = new HashValue("hashValue");
         var hashValue2 = new HashValue("hashValue");
 
         // Act
-        var result = hashValue1.GetHashCode() == hashValue2.GetHashCode();
+        var resultHash = hashValue1.GetHashCode() == hashValue2.GetHashCode();
+        var resultEqual = hashValue1 == hashValue2;
 
         // Assert
-        result.Should().BeTrue();
+        resultHash.Should().BeTrue();
+        resultEqual.Should().BeTrue();
     }
-    
+
     [Fact]
-    public void HashValueImplicitOperatorToString_Should_BeEqual()
+    public void WhenCompareDifferent_Should_BeDifferent()
+    {
+        // Arrange
+        var hashValue1 = new HashValue("hashValue1");
+        var hashValue2 = new HashValue("hashValue2");
+
+        // Act
+        var resultHash = hashValue1.GetHashCode() != hashValue2.GetHashCode();
+        var resultEqual = hashValue1 != hashValue2;
+
+        // Assert
+        resultHash.Should().BeTrue();
+        resultEqual.Should().BeTrue();
+    }
+
+    [Fact]
+    public void WhenImplicitOperatorToString_Should_BeEqual()
     {
         // Arrange
         var hashValue = new HashValue("hashValue");

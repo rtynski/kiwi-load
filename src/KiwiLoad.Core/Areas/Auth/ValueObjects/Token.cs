@@ -1,7 +1,8 @@
 ﻿using KiwiLoad.Core.Exceptions.Auth;
+using KiwiLoad.Core.Models;
 
 namespace KiwiLoad.Core.Areas.Auth.ValueObjects;
-public class Token : IEquatable<Token>
+public class Token : ValueObject
 {
     public string Value { get; }
 
@@ -14,25 +15,9 @@ public class Token : IEquatable<Token>
 
         Value = value;
     }
-
-    public bool Equals(Token? other)
+    protected override IEnumerable<object> GetAtomicValues()
     {
-        if (other is null)
-            return false;
-
-        return string.Compare(Value, other.Value, false) == 0;
-    }
-
-    public override bool Equals(object? obj)
-    {
-        if (obj is null)
-            return false;
-        return Equals(obj);
-    }
-
-    public override int GetHashCode()
-    {
-        return Value.GetHashCode();
+        yield return Value;
     }
 
     public static implicit operator string(Token userName)

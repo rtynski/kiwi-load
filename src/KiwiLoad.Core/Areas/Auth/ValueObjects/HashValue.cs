@@ -1,38 +1,23 @@
 ﻿using KiwiLoad.Core.Exceptions.Auth;
+using KiwiLoad.Core.Models;
 
 namespace KiwiLoad.Core.Areas.Auth.ValueObjects;
-public class HashValue : IEquatable<HashValue>
+public class HashValue : ValueObject
 {
     public string Value { get; }
-
     public HashValue(string? value)
     {
         if (value is null || string.IsNullOrWhiteSpace(value))
         {
             throw new KiwiLoadAuthHashValueEmptyException();
         }
-
         Value = value;
     }
+    
 
-    public bool Equals(HashValue? other)
+    protected override IEnumerable<object> GetAtomicValues()
     {
-        if (other is null)
-            return false;
-
-        return string.Compare(Value, other.Value, false) == 0;
-    }
-
-    public override bool Equals(object? obj)
-    {
-        if (obj is null)
-            return false;
-        return Equals(obj as HashValue);
-    }
-
-    public override int GetHashCode()
-    {
-        return Value.GetHashCode();
+        yield return Value;
     }
 
     public static implicit operator string(HashValue userName)
@@ -44,13 +29,4 @@ public class HashValue : IEquatable<HashValue>
     {
         return new HashValue(value);
     }
-    public static bool operator ==(HashValue left, HashValue right)
-    {
-        return left.Equals(right);
-    }
-    public static bool operator !=(HashValue left, HashValue right)
-    {
-        return !left.Equals(right);
-    }
-
 }
