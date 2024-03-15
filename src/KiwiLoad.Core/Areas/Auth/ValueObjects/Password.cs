@@ -1,7 +1,8 @@
 ﻿using KiwiLoad.Core.Exceptions.Auth;
+using KiwiLoad.Core.Models;
 
 namespace KiwiLoad.Core.Areas.Auth.ValueObjects;
-public class Password : IEquatable<Password>
+public class Password : ValueObject
 {
     public string Value { get; }
 
@@ -14,25 +15,9 @@ public class Password : IEquatable<Password>
 
         Value = value;
     }
-
-    public bool Equals(Password? other)
+    protected override IEnumerable<object> GetAtomicValues()
     {
-        if (other is null)
-            return false;
-
-        return String.Compare(Value, other.Value, false) == 0;
-    }
-
-    public override bool Equals(object? obj)
-    {
-        if (obj is null)
-            return false;
-        return Equals(obj as Password);
-    }
-
-    public override int GetHashCode()
-    {
-        return Value.GetHashCode();
+        yield return Value;
     }
 
     public static implicit operator string(Password userName)
@@ -44,4 +29,5 @@ public class Password : IEquatable<Password>
     {
         return new Password(value);
     }
+
 }
