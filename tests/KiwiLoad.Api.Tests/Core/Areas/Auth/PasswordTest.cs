@@ -2,18 +2,18 @@
 using KiwiLoad.Core.Areas.Auth.ValueObjects;
 using KiwiLoad.Core.Exceptions.Auth;
 
-namespace KiwiLoad.Api.Tests.Core.Areas;
+namespace KiwiLoad.Api.Tests.Core.Areas.Auth;
 public class PasswordTest
 {
     [Fact]
     public void WhenEmpty_Should_GetExceptions()
     {
         // Arrange
-        var hashValue = string.Empty;
+        var passwordValue = string.Empty;
         var exceptionMessage = "Password cannot be null or empty";
 
         // Act
-        var exception = Record.Exception(() => new Password(hashValue));
+        var exception = Record.Exception(() => new Password(passwordValue));
 
         // Assert
         exception.Should().NotBeNull();
@@ -25,11 +25,11 @@ public class PasswordTest
     public void WhenNull_Should_GetExceptions()
     {
         // Arrange
-        string? hashValue = null;
+        string? passwordValue = null;
         var exceptionMessage = "Password cannot be null or empty";
 
         // Act
-        var exception = Record.Exception(() => new Password(hashValue));
+        var exception = Record.Exception(() => new Password(passwordValue));
 
         // Assert
         exception.Should().NotBeNull();
@@ -41,10 +41,10 @@ public class PasswordTest
     public void WhenNotNull_Should_NoException()
     {
         // Arrange
-        var hashValue = "hashValue";
+        var passwordValue = "password";
 
         // Act
-        var exception = Record.Exception(() => new Password(hashValue));
+        var exception = Record.Exception(() => new Password(passwordValue));
 
         // Assert
         exception.Should().BeNull();
@@ -54,29 +54,29 @@ public class PasswordTest
     public void WhenTheSameEquals_Should_BeTrue()
     {
         // Arrange
-        var hashValue1 = new Password("hashValue");
-        var hashValue2 = new Password("hashValue");
+        var password1 = new Password("password");
+        var password2 = new Password("password");
 
         // Act
-        var resultTyp = hashValue1.Equals(hashValue2);
-        var resultObj = hashValue1.Equals((object)hashValue2);
+        var resultTyp = password1.Equals(password2);
+        var resultObj = password1.Equals((object)password2);
 
         // Assert
         resultTyp.Should().BeTrue();
         resultObj.Should().BeTrue();
-        hashValue1.Value.Should().Be(hashValue2.Value);
+        password1.Value.Should().Be(password2.Value);
     }
 
     [Fact]
     public void WhenNotTheSameEquals_Should_BeFalse()
     {
         // Arrange
-        var hashValue1 = new Password("hashValue1");
-        var hashValue2 = new Password("hashValue2");
+        var password1 = new Password("password1");
+        var password2 = new Password("password2");
 
         // Act
-        var resultTyp = hashValue1.Equals(hashValue2);
-        var resultObj = hashValue1.Equals((object)hashValue2);
+        var resultTyp = password1.Equals(password2);
+        var resultObj = password1.Equals((object)password2);
 
         // Assert
         resultTyp.Should().BeFalse();
@@ -87,12 +87,12 @@ public class PasswordTest
     public void WhenOneNull_Should_BeFalse()
     {
         // Arrange
-        var hashValue1 = new Password("hashValue");
-        HashValue? hashValue2 = null;
-        object? hashValue3 = null;
+        var password1 = new Password("password");
+        HashValue? password2 = null;
+        object? password3 = null;
         // Act
-        var resultTyp = hashValue1.Equals(hashValue2);
-        var resultObj = hashValue1.Equals(hashValue3);
+        var resultTyp = password1.Equals(password2);
+        var resultObj = password1.Equals(password3);
 
         // Assert
         resultTyp.Should().BeFalse();
@@ -103,12 +103,12 @@ public class PasswordTest
     public void WhenCompare_Should_BeTrue()
     {
         // Arrange
-        var hashValue1 = new Password("hashValue");
-        var hashValue2 = new Password("hashValue");
+        var password1 = new Password("password");
+        var password2 = new Password("password");
 
         // Act
-        var resultHash = hashValue1.GetHashCode() == hashValue2.GetHashCode();
-        var resultEqual = hashValue1 == hashValue2;
+        var resultHash = password1.GetHashCode() == password2.GetHashCode();
+        var resultEqual = password1 == password2;
 
         // Assert
         resultHash.Should().BeTrue();
@@ -119,12 +119,12 @@ public class PasswordTest
     public void WhenCompareDifferent_Should_BeDifferent()
     {
         // Arrange
-        var hashValue1 = new Password("hashValue1");
-        var hashValue2 = new Password("hashValue2");
+        var password1 = new Password("password1");
+        var password2 = new Password("password2");
 
         // Act
-        var resultHash = hashValue1.GetHashCode() != hashValue2.GetHashCode();
-        var resultEqual = hashValue1 != hashValue2;
+        var resultHash = password1.GetHashCode() != password2.GetHashCode();
+        var resultEqual = password1 != password2;
 
         // Assert
         resultHash.Should().BeTrue();
@@ -135,12 +135,13 @@ public class PasswordTest
     public void WhenImplicitOperatorToString_Should_BeEqual()
     {
         // Arrange
-        var hashValue = new Password("hashValue");
+        var initValue = "password";
+        var hashValue = new Password(initValue);
 
         // Act
         var result = (string)hashValue;
 
         // Assert
-        result.Should().Be(hashValue.Value);
+        result.Should().Be(initValue);
     }
 }

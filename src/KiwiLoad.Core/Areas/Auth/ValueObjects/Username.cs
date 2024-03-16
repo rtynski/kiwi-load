@@ -15,6 +15,7 @@ public class Username : ValueObject
 
         Value = value;
     }
+
     protected override IEnumerable<object> GetAtomicValues()
     {
         yield return Value;
