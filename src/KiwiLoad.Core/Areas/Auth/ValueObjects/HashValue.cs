@@ -13,7 +13,6 @@ public class HashValue : ValueObject
         }
         Value = value;
     }
-    
 
     protected override IEnumerable<object> GetAtomicValues()
     {

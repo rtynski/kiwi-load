@@ -2,7 +2,7 @@
 using KiwiLoad.Core.Areas.Auth.ValueObjects;
 using KiwiLoad.Core.Exceptions.Auth;
 
-namespace KiwiLoad.Api.Tests.Core.Areas;
+namespace KiwiLoad.Api.Tests.Core.Areas.Auth;
 public class HashValueTest
 {
     [Fact]
@@ -82,7 +82,7 @@ public class HashValueTest
         resultTyp.Should().BeFalse();
         resultObj.Should().BeFalse();
     }
-    
+
     [Fact]
     public void WhenOneNull_Should_BeFalse()
     {
@@ -135,12 +135,13 @@ public class HashValueTest
     public void WhenImplicitOperatorToString_Should_BeEqual()
     {
         // Arrange
-        var hashValue = new HashValue("hashValue");
+        var initValue = "hashValue";
+        var hashValue = new HashValue(initValue);
 
         // Act
         var result = (string)hashValue;
 
         // Assert
-        result.Should().Be(hashValue.Value);
+        result.Should().Be(initValue);
     }
 }

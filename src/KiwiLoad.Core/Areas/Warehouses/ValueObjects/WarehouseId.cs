@@ -6,7 +6,7 @@ public class WarehouseId : ValueObject
 {
     public int Value { get; }
 
-    private WarehouseId(int? value)
+    public WarehouseId(int? value)
     {
         if (value is null or <= 0)
         {
