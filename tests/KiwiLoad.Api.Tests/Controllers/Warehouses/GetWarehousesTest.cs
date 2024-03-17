@@ -41,7 +41,7 @@ public class GetWarehousesTest
         var request = new HttpRequestMessage(HttpMethod.Get, BaseUrl);
 
         // Act
-        client.DefaultRequestHeaders.Add("Authorization", "test_token");
+        client.DefaultRequestHeaders.Add("Authorization", Mt.Token);
         var response = await client.SendAsync(request);
 
         // Assert

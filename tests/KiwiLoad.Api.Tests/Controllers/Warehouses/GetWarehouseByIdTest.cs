@@ -27,7 +27,7 @@ public class GetWarehouseByIdTest
         var request = new HttpRequestMessage(HttpMethod.Get, "/api/warehouses/v1/1");
 
         // Act
-        client.DefaultRequestHeaders.Add("Authorization", "test_token");
+        client.DefaultRequestHeaders.Add("Authorization", Mt.Token);
         var response = await client.SendAsync(request);
 
         // Assert
@@ -47,7 +47,7 @@ public class GetWarehouseByIdTest
         var request = new HttpRequestMessage(HttpMethod.Get, "/api/warehouses/v1/11");
 
         // Act
-        client.DefaultRequestHeaders.Add("Authorization", "test_token");
+        client.DefaultRequestHeaders.Add("Authorization", Mt.Token);
         var response = await client.SendAsync(request);
 
         // Assert
@@ -61,7 +61,7 @@ public class GetWarehouseByIdTest
         var request = new HttpRequestMessage(HttpMethod.Get, "/api/warehouses/v1/0");
 
         // Act
-        client.DefaultRequestHeaders.Add("Authorization", "test_token");
+        client.DefaultRequestHeaders.Add("Authorization", Mt.Token);
         var response = await client.SendAsync(request);
 
         // Assert

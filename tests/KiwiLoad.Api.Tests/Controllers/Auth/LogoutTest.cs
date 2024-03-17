@@ -43,7 +43,7 @@ public class LogoutTest
         var request = new HttpRequestMessage(HttpMethod.Post, BaseUrl);
 
         // Act
-        client.DefaultRequestHeaders.Add("Authorization", "test_token");
+        client.DefaultRequestHeaders.Add("Authorization", Mt.Token);
         request.Content = new StringContent("{}", Encoding.UTF8, Mt.Json);
         var response = await client.SendAsync(request);
 
