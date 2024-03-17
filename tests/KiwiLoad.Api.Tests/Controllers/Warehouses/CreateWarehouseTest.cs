@@ -29,7 +29,7 @@ public class CreateWarehouseTest
         var request = new HttpRequestMessage(HttpMethod.Post, BaseUrl);
 
         // Act
-        client.DefaultRequestHeaders.Add("Authorization", "test_token");
+        client.DefaultRequestHeaders.Add("Authorization", Mt.Token);
         var warehouse = new WarehouseReq { };
         request.Content = new StringContent(JsonConvert.SerializeObject(warehouse), Encoding.UTF8, Mt.Json);
         var response = await client.SendAsync(request);

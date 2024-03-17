@@ -77,7 +77,9 @@ public class LoginTest
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
     }
+
     [Fact]
+    // Disable temporary
     public async Task V1_Should_Authorized()
     {
         // Arrange
@@ -86,8 +88,8 @@ public class LoginTest
         // Act
         var login = new LoginReq()
         {
-            Username = "Test",
-            Password = "Password"
+            Username = "admin",
+            Password = "admin"
         };
         request.Content = new StringContent(JsonConvert.SerializeObject(login), Encoding.UTF8, Mt.Json);
         var response = await client.SendAsync(request);
