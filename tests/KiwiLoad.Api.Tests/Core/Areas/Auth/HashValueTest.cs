@@ -1,6 +1,6 @@
 ﻿using FluentAssertions;
-using KiwiLoad.Core.Areas.Auth.ValueObjects;
 using KiwiLoad.Core.Exceptions.Auth;
+using KiwiLoad.Core.ValueObjects;
 
 namespace KiwiLoad.Api.Tests.Core.Areas.Auth;
 public class HashValueTest

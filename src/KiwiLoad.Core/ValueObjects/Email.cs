@@ -1,33 +1,31 @@
 ﻿using KiwiLoad.Core.Exceptions.Auth;
 using KiwiLoad.Core.Models;
 
-namespace KiwiLoad.Core.Areas.Auth.ValueObjects;
-public class Password : ValueObject
+namespace KiwiLoad.Core.ValueObjects;
+public class Email : ValueObject
 {
     public string Value { get; }
-
-    public Password(string? value)
+    public Email(string? value)
     {
         if (value is null || string.IsNullOrWhiteSpace(value))
         {
-            throw new KiwiLoadAuthPasswordEmptyException();
+            throw new KiwiLoadAuthHashValueEmptyException();
         }
-
         Value = value;
     }
+
     protected override IEnumerable<object> GetAtomicValues()
     {
         yield return Value;
     }
 
-    public static implicit operator string(Password userName)
+    public static implicit operator string(Email userName)
     {
         return userName.Value;
     }
 
-    public static implicit operator Password(string value)
+    public static implicit operator Email(string value)
     {
-        return new Password(value);
+        return new Email(value);
     }
-
 }

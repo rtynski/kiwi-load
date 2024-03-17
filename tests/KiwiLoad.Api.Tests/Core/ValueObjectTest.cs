@@ -1,5 +1,5 @@
 ﻿using FluentAssertions;
-using KiwiLoad.Core.Areas.Auth.ValueObjects;
+using KiwiLoad.Core.ValueObjects;
 
 namespace KiwiLoad.Api.Tests.Core;
 public class ValueObjectTest
