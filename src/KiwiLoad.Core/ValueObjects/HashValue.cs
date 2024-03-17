@@ -1,7 +1,7 @@
 ﻿using KiwiLoad.Core.Exceptions.Auth;
 using KiwiLoad.Core.Models;
 
-namespace KiwiLoad.Core.Areas.Auth.ValueObjects;
+namespace KiwiLoad.Core.ValueObjects;
 public class HashValue : ValueObject
 {
     public string Value { get; }

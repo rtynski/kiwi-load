@@ -17,6 +17,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\Infrastructures\KiwiLoad.Infrastructure.InMemory\KiwiLoad.Infrastructure.InMemory.csproj" />
 	  <ProjectReference Include="..\KiwiLoad.Infrastructure\KiwiLoad.Infrastructure.csproj" />
 	</ItemGroup>
 </Project>

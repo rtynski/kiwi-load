@@ -4,11 +4,14 @@ using KiwiLoad.Core.Authentication;
 using KiwiLoad.Infrastructure;
 using Microsoft.AspNetCore.Authentication;
 using KiwiLoad.Infrastructure.Errors;
+using KiwiLoad.Core.Areas.Auth;
+using KiwiLoad.Core.Areas.Users;
 
 namespace KiwiLoad.Api;
 
 public class Startup
 {
+    private class SeedData { }
     private const string TokenScheme = nameof(TokenScheme);
     public void ConfigureServices(IServiceCollection services)
     {
@@ -32,7 +35,9 @@ public class Startup
         if (env.IsDevelopment())
         {
             app.UseDeveloperExceptionPage();
+            Initialize(app.ApplicationServices);
         }
+        app.UseSwagger();
 
         app.UseErrorHandler();
 
@@ -46,6 +51,22 @@ public class Startup
         {
             endpoints.MapControllers();
         });
-
+    }
+    public static void Initialize(IServiceProvider serviceProvider)
+    {
+        using (var scope = serviceProvider.CreateScope())
+        {
+            var services = scope.ServiceProvider;
+            try
+            {
+                var authService = services.GetRequiredService<IUsersService>();
+                authService.AddUser(new Core.Areas.Users.DTO.AddUserDto("admin", "admin@example.com", "admin"));
+            }
+            catch (Exception ex)
+            {
+                var logger = services.GetRequiredService<ILogger<SeedData>>();
+                logger.LogError(ex, "Błąd podczas seedowania danych.");
+            }
+        }
     }
 }

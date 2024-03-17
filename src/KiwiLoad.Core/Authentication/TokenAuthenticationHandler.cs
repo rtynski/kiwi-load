@@ -6,7 +6,7 @@ using System.Text.Encodings.Web;
 namespace KiwiLoad.Core.Authentication;
 public class TokenAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>
 {
-    private const string Token = "test_token";
+    private const string Token = "BAt4IElJoNDnvinqH6gMBhBO9Y8YLLBk0N4SZkijQEz9VBqVfuXuUSzFDDClD3Ya";
 
     public TokenAuthenticationHandler(
         IOptionsMonitor<AuthenticationSchemeOptions> options,
@@ -21,6 +21,7 @@ public class TokenAuthenticationHandler : AuthenticationHandler<AuthenticationSc
     {
         await Task.Yield();
         var token = Request.Headers["Authorization"];
+        token = token.ToString().Replace("Bearer ", "");
 
         if (token == Token)
         {

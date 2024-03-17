@@ -1,5 +1,17 @@
 @url = https://localhost:7090
+@token = BAt4IElJoNDnvinqH6gMBhBO9Y8YLLBk0N4SZkijQEz9VBqVfuXuUSzFDDClD3Ya
 
+### LOGIN
+POST {{url}}/api/auth/v1/login
+Content-Type: application/json; charset=UTF-8
+
+{
+  "username": "admin",
+  "password": "admin"
+}
+
+### Get all warehouses
 GET {{url}}/api/warehouses/v1
+Authorization: Bearer {{token}}
 Accept: application/json
 
