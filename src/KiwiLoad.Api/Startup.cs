@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authentication;
 using KiwiLoad.Infrastructure.Errors;
 using KiwiLoad.Core.Areas.Auth;
 using KiwiLoad.Core.Areas.Users;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace KiwiLoad.Api;
 
@@ -18,6 +19,8 @@ public class Startup
         services
             .AddAuthentication(TokenScheme)
             .AddScheme<AuthenticationSchemeOptions, TokenAuthenticationHandler>(TokenScheme, options => { });
+
+        services.AddSingleton<IMemoryCache, MemoryCache>();
 
         services.AddErrorHandler();
 
