@@ -1,7 +1,11 @@
 ﻿using FluentAssertions;
 using KiwiLoad.Api.Controllers.Warehouses.Models;
+using KiwiLoad.Application.Security;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
+using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.DependencyInjection;
+using Moq;
 using Newtonsoft.Json;
 using System.Net;
 using System.Text;
@@ -18,8 +22,22 @@ public class CreateWarehouseTest
         var testServer = new WebHostBuilder()
             .UseEnvironment("Development")
             .UseStartup<Startup>();
+        // Replace ITokenGeneratorProvider
+        testServer.ConfigureTestServices(services =>
+        {
+            services.Remove(services.First(d => d.ServiceType == typeof(ITokenGeneratorProvider)));
+            var tokenProviderMock = new Mock<ITokenGeneratorProvider>();
+            tokenProviderMock.Setup(x => x.GenerateToken(It.IsAny<int>())).Returns(Mt.Token);
+            services.AddSingleton(tokenProviderMock.Object);
+        });
         server = new TestServer(testServer);
         client = server.CreateClient();
+        // init in scoped
+        using (var scope = server.Services.CreateScope())
+        {
+            var mc = scope.ServiceProvider.GetRequiredService<IMemoryCache>();
+            mc.Set(Mt.Token, Mt.Username);
+        }
     }
 
     [Fact]

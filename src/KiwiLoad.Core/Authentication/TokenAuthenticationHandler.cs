@@ -26,10 +26,9 @@ public class TokenAuthenticationHandler : AuthenticationHandler<AuthenticationSc
     protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
     {
         await Task.Yield();
-        var token = Request.Headers["Authorization"];
-        token = (string)token.ToString().Replace("Bearer ", "");
+        string token = Request.Headers["Authorization"].ToString();
+        token = token.ToString().Replace("Bearer ", "").Trim();
 
-        // YDYk2xyRSHy2xYDOMEQyDg77YZWSX0B427bO4OC2ayHSNZ9iYVMRC7UMK1Rx4p3C
         if (memoryCache.TryGetValue<string>(token, out var username))
         {
             username = username ?? throw new ArgumentException("Username not found");
