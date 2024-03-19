@@ -1,10 +1,10 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace KiwiLoad.Application.Security;
-internal class PasswordHashGenerator
+namespace KiwiLoad.Application.Security.Providers;
+internal class PasswordHashGeneratorProvider : IPasswordHashGeneratorProvider
 {
-    public static string GenerateSHA256Hash(string password)
+    public string GenerateSHA256Hash(string password)
     {
         using var sha256Hash = SHA256.Create();
         byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(password));

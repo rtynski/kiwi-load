@@ -7,22 +7,28 @@ using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 
 namespace KiwiLoad.Application.Services.Auth;
-public class AuthService : IAuthService
+internal class AuthService : IAuthService
 {
     const int TokenLength = 64;
     private readonly ILogger<AuthService> logger;
     private readonly IAuthRepository authRepository;
     private readonly IMemoryCache memoryCache;
+    private readonly ITokenGeneratorProvider tokenGeneratorProvider;
+    private readonly IPasswordHashGeneratorProvider passwordHashGeneratorProvider;
 
     public AuthService(
         ILogger<AuthService> logger,
         IAuthRepository authRepository,
-        IMemoryCache memoryCache
+        IMemoryCache memoryCache,
+        ITokenGeneratorProvider tokenGeneratorProvider,
+        IPasswordHashGeneratorProvider passwordHashGeneratorProvider
     )
     {
         this.logger=logger;
         this.authRepository=authRepository;
         this.memoryCache=memoryCache;
+        this.tokenGeneratorProvider=tokenGeneratorProvider;
+        this.passwordHashGeneratorProvider=passwordHashGeneratorProvider;
     }
 
     public async Task<Token?> Authenticate(Username username, Password password)
@@ -37,11 +43,16 @@ public class AuthService : IAuthService
             logger.LogWarning(exp, exp.Message);
             return null;
         }
-        var hashValuePassword = (HashValue)PasswordHashGenerator.GenerateSHA256Hash(password);
+        var hashValuePassword = (HashValue)passwordHashGeneratorProvider.GenerateSHA256Hash(password);
         if(hashValueDb == hashValuePassword)
         {
-            var tokenString = TokenGenerator.GenerateToken(TokenLength);
-            var mc = memoryCache.Set(tokenString, (string)username, TimeSpan.FromMinutes(30));
+            var tokenString = tokenGeneratorProvider.GenerateToken(TokenLength);
+            var vv = TimeSpan.FromMinutes(30);
+            memoryCache.Set(
+                tokenString,
+                (string)username,
+                vv
+            );
             return (Token)tokenString;
         }
          

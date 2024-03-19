@@ -1,9 +1,9 @@
 ﻿using System.Security.Cryptography;
 
-namespace KiwiLoad.Application.Security;
-internal class TokenGenerator
+namespace KiwiLoad.Application.Security.Providers;
+internal class TokenGeneratorProvider : ITokenGeneratorProvider
 {
-    public static string GenerateToken(int length)
+    public string GenerateToken(int length)
     {
         const string validChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
         char[] chars = new char[length];

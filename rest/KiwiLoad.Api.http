@@ -1,5 +1,5 @@
 @url = https://localhost:7090
-@token = 9rlzEWXYH3UNmbAYazw2yAtBNfBKTKAZOJAjdofoBaK872qnZeuewsCGMOBIUXow
+@token = mwVmPrcFV7RbVD2UswTtW41J4FbBzZnvzaxYsiXC2rGbmiwu68NEBHIPH0ksyyBI
 
 ### LOGIN
 POST {{url}}/api/auth/v1/login
