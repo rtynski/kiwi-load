@@ -1,12 +1,10 @@
 ﻿using KiwiLoad.Infrastructure.Databases.Interfaces;
 
 namespace KiwiLoad.Infrastructure.Databases.Entries;
-internal class User : IDisableDate
+internal class Warehouse : IDisableDate
 {
     public int Id { get; set; }
-    public string Username { get; set; } = string.Empty;
-    public string Email { get; set; } = string.Empty;
-    public string PasswordHash { get; set; } = string.Empty;
+    public string Name { get; set; } = string.Empty;
     public DateTime AddDate { get; set; }
     public int AddUserId { get; set; }
     public DateTime UpdateDate { get; set; }

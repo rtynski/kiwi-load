@@ -48,7 +48,9 @@ public class CreateWarehouseTest
 
         // Act
         client.DefaultRequestHeaders.Add("Authorization", Mt.Token);
-        var warehouse = new WarehouseReq { };
+        var warehouse = new WarehouseReq {
+            Name = "Test"
+        };
         request.Content = new StringContent(JsonConvert.SerializeObject(warehouse), Encoding.UTF8, Mt.Json);
         var response = await client.SendAsync(request);
 
@@ -60,6 +62,6 @@ public class CreateWarehouseTest
 
         response.StatusCode.Should().Be(HttpStatusCode.OK);
         warehouses.Should().NotBeNull();
-        warehouses!.Id.Should().Be(6);
+        warehouses!.Id.Should().Be(1);
     }
 }

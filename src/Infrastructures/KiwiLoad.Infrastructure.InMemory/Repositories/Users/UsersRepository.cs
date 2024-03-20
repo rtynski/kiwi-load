@@ -6,7 +6,7 @@ using KiwiLoad.Infrastructure.Databases.Entries;
 using Microsoft.Extensions.Logging;
 
 namespace KiwiLoad.Infrastructure.Repositories.Users;
-public class UsersRepository : IUsersRepository
+internal class UsersRepository : IUsersRepository
 {
     private readonly KiwiDbContext dbContext;
     private readonly ILogger<UsersRepository> logger;

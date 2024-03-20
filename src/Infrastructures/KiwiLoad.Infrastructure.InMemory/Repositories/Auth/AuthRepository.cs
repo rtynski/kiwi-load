@@ -4,7 +4,7 @@ using KiwiLoad.Infrastructure.Databases;
 using Microsoft.EntityFrameworkCore;
 
 namespace KiwiLoad.Infrastructure.Repositories.Auth;
-public class AuthRepository : IAuthRepository
+internal class AuthRepository : IAuthRepository
 {
     private readonly KiwiDbContext dbContext;
 
