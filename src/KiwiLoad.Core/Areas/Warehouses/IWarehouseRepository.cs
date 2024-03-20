@@ -5,6 +5,6 @@ namespace KiwiLoad.Core.Areas.Warehouses;
 public interface IWarehouseRepository
 {
     Task<IEnumerable<WarehouseDto>> GetAll();
-    Task<WarehouseDto> Create(WarehouseCreateDto warehouse);
+    Task<WarehouseDto> Create(WarehouseCreateDto warehouse, int userId);
     Task<WarehouseDto?> GetById(WarehouseId id);
 }
