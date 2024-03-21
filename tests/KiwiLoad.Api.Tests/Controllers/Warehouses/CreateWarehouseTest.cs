@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using KiwiLoad.Api.Controllers.Warehouses.Models;
 using KiwiLoad.Application.Security;
+using KiwiLoad.Infrastructure.Databases;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Caching.Memory;
@@ -37,6 +38,10 @@ public class CreateWarehouseTest
         {
             var mc = scope.ServiceProvider.GetRequiredService<IMemoryCache>();
             mc.Set(Mt.Token, Mt.Username);
+
+            var db = scope.ServiceProvider.GetRequiredService<KiwiDbContext>();
+            db.Database.EnsureDeleted();
+            db.SaveChanges();
         }
     }
 
