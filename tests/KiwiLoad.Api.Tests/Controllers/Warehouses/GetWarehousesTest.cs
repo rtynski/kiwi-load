@@ -40,6 +40,7 @@ public class GetWarehousesTest
 
             var db = scope.ServiceProvider.GetRequiredService<KiwiDbContext>();
             db.Database.EnsureDeleted();
+            db.SaveChanges();
         }
     }
 
