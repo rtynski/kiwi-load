@@ -15,4 +15,9 @@
 	  <ProjectReference Include="..\..\KiwiLoad.Infrastructure\KiwiLoad.Infrastructure.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+		<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+			<_Parameter1>KiwiLoad.Api.Tests</_Parameter1>
+		</AssemblyAttribute>
+	</ItemGroup>
 </Project>

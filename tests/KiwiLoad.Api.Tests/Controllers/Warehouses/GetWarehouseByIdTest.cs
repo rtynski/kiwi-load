@@ -1,6 +1,8 @@
 ﻿using FluentAssertions;
 using KiwiLoad.Api.Controllers.Warehouses.Models;
 using KiwiLoad.Application.Security;
+using KiwiLoad.Infrastructure.Databases;
+using KiwiLoad.Infrastructure.Databases.Entries;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Caching.Memory;
@@ -8,6 +10,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Moq;
 using Newtonsoft.Json;
 using System.Net;
+
+[assembly: CollectionBehavior(DisableTestParallelization = true)]
 
 namespace KiwiLoad.Api.Tests.Controller.Warehouses;
 public class GetWarehouseByIdTest
@@ -35,10 +39,12 @@ public class GetWarehouseByIdTest
         {
             var mc = scope.ServiceProvider.GetRequiredService<IMemoryCache>();
             mc.Set(Mt.Token, Mt.Username);
+            var db = scope.ServiceProvider.GetRequiredService<KiwiDbContext>();
+            db.Warehouses.Add(new Warehouse { Id = 1, Name = "Test" });
         }
     }
 
-    [Fact(Skip = "Fix init")]
+    [Fact]
     public async Task V1ById_Should_ReturnWarehouse()
     {
         // Arrange
