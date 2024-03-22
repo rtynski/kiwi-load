@@ -68,7 +68,7 @@ public class Startup
             catch (Exception ex)
             {
                 var logger = services.GetRequiredService<ILogger<SeedData>>();
-                logger.LogError(ex, "Błąd podczas seedowania danych.");
+                logger.LogError(ex, "Error while seeding data.");
             }
         }
     }

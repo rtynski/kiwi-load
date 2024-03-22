@@ -22,6 +22,7 @@ public class GetWarehousesTest
         var testServer = new WebHostBuilder()
             .UseEnvironment("Development")
             .UseStartup<Startup>();
+
         // Replace ITokenGeneratorProvider
         testServer.ConfigureTestServices(services =>
         {
@@ -32,12 +33,14 @@ public class GetWarehousesTest
         });
         server = new TestServer(testServer);
         client = server.CreateClient();
-        // init in scoped
+        // Init in scoped
         using (var scope = server.Services.CreateScope())
         {
+            // Set token
             var mc = scope.ServiceProvider.GetRequiredService<IMemoryCache>();
             mc.Set(Mt.Token, Mt.Username);
 
+            // Init db for test
             var db = scope.ServiceProvider.GetRequiredService<KiwiDbContext>();
             db.Database.EnsureDeleted();
             db.SaveChanges();
