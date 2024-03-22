@@ -1,7 +1,13 @@
 ﻿using FluentAssertions;
 using KiwiLoad.Api.Controllers.Auth.Login.V1.Models;
+using KiwiLoad.Application.Security;
+using KiwiLoad.Infrastructure.Databases;
+using KiwiLoad.Infrastructure.Databases.Entries;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
+using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.DependencyInjection;
+using Moq;
 using Newtonsoft.Json;
 using System.Net;
 using System.Text;
@@ -20,6 +26,23 @@ public class LoginTest
             .UseStartup<Startup>();
         server = new TestServer(testServer);
         client = server.CreateClient();
+
+        testServer.ConfigureTestServices(services =>
+        {
+            services.Remove(services.First(d => d.ServiceType == typeof(ITokenGeneratorProvider)));
+            var tokenProviderMock = new Mock<ITokenGeneratorProvider>();
+            tokenProviderMock.Setup(x => x.GenerateToken(It.IsAny<int>())).Returns(Mt.Token);
+            services.AddSingleton(tokenProviderMock.Object);
+        });
+
+        // Init in scoped
+        using (var scope = server.Services.CreateScope())
+        {
+            var db = scope.ServiceProvider.GetRequiredService<KiwiDbContext>();
+            db.Database.EnsureDeleted();
+            db.Users.Add(new User { Id = 1, Username = "admin", PasswordHash = "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918" });
+            db.SaveChanges();
+        }
     }
     [Fact]
     public async Task LoginV1NoUsername_Should_ReturnUnauthorized()
