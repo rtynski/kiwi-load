@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  build_InM:
 
     runs-on: ubuntu-latest
 
@@ -20,9 +20,9 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build --no-restore -c R.InM
     - name: Test
-      run: dotnet test --no-build --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:ExcludeByFile="**/*.Api/Program.cs"
+      run: dotnet test --no-build -c R.InM --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:ExcludeByFile="**/*.Api/Program.cs"
     - name: Upload coverage reports to Codecov
       if: github.event_name == 'push'
       shell: bash
@@ -33,3 +33,19 @@ jobs:
         branch=${ref#refs/heads/}
         echo $branch
         ./codecov -b $branch -f ./tests/KiwiLoad.Api.Tests/coverage.opencover.xml -t ${{ secrets.CODECOV_TOKEN }}
+  build_SqlS:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --no-restore -c R.SqlS
+    - name: Test
+      run: dotnet test --no-build -c R.SqlS
