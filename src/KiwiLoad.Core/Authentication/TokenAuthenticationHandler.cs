@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using System.Security.Principal;
 using System.Text.Encodings.Web;
 
 namespace KiwiLoad.Core.Authentication;
@@ -28,7 +29,11 @@ public class TokenAuthenticationHandler : AuthenticationHandler<AuthenticationSc
         await Task.Yield();
         string token = Request.Headers["Authorization"].ToString();
         token = token.ToString().Replace("Bearer ", "").Trim();
-
+        string path = this.Request.Path.HasValue ? this.Request.Path.Value : "";
+        if(path.StartsWith("/swagger") || path.StartsWith("/health"))
+        {
+            return AuthenticateResult.NoResult();
+        }
         if (memoryCache.TryGetValue<string>(token, out var username))
         {
             username = username ?? throw new ArgumentException("Username not found");

@@ -51,7 +51,7 @@ public class GetWarehouseByIdTest
     }
 
     [Fact]
-    public async Task V1ById_Should_ReturnWarehouse()
+    public async Task V1_ById_Should_ReturnWarehouse()
     {
         // Arrange
         var request = new HttpRequestMessage(HttpMethod.Get, "/api/warehouses/v1/1");
@@ -72,7 +72,7 @@ public class GetWarehouseByIdTest
     }
 
     [Fact]
-    public async Task V1ById_Should_ReturnNotFound()
+    public async Task V1_ById_Should_ReturnNotFound()
     {
         // Arrange
         var request = new HttpRequestMessage(HttpMethod.Get, "/api/warehouses/v1/11");
@@ -86,7 +86,7 @@ public class GetWarehouseByIdTest
     }
 
     [Fact]
-    public async Task V1ById_Should_ReturnBadRequest()
+    public async Task V1_ById_Should_ReturnBadRequest()
     {
         // Arrange
         var request = new HttpRequestMessage(HttpMethod.Get, "/api/warehouses/v1/0");
