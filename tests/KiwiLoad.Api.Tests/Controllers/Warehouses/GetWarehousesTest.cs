@@ -48,7 +48,7 @@ public class GetWarehousesTest
     }
 
     [Fact]
-    public async Task V1NoAuth_Should_ReturnNoAuth()
+    public async Task V1_NoAuth_Should_ReturnNoAuth()
     {
         // Arrange
         var request = new HttpRequestMessage(HttpMethod.Get, BaseUrl);

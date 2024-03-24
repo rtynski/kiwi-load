@@ -1,11 +1,10 @@
 ﻿using KiwiLoad.Application;
 using KiwiLoad.Core;
+using KiwiLoad.Core.Areas.Users;
 using KiwiLoad.Core.Authentication;
 using KiwiLoad.Infrastructure;
-using Microsoft.AspNetCore.Authentication;
 using KiwiLoad.Infrastructure.Errors;
-using KiwiLoad.Core.Areas.Auth;
-using KiwiLoad.Core.Areas.Users;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Caching.Memory;
 
 namespace KiwiLoad.Api;
@@ -41,6 +40,10 @@ public class Startup
             Initialize(app.ApplicationServices);
         }
         app.UseSwagger();
+        app.UseSwaggerUI(c =>
+        {
+            c.SwaggerEndpoint("/swagger/v1/swagger.json", "KiwiLoad API V1");
+        });
 
         app.UseErrorHandler();
 

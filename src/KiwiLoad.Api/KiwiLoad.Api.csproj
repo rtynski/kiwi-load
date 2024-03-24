@@ -9,6 +9,7 @@
 		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
 		<DockerfileContext>..\..</DockerfileContext>
 		<EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
+		<Configurations>D.InM;R.InM;D.SqlS;R.SqlS</Configurations>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -17,10 +18,21 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Infrastructures\KiwiLoad.Infrastructure.InMemory\KiwiLoad.Infrastructure.InMemory.csproj" />
+	  
 	  <ProjectReference Include="..\KiwiLoad.Infrastructure\KiwiLoad.Infrastructure.csproj" />
 	</ItemGroup>
-	
+	<ItemGroup Condition=" '$(Configuration)' == 'R.InM'">
+		<ProjectReference Include="..\Infrastructures\KiwiLoad.Infrastructure.InMemory\KiwiLoad.Infrastructure.InMemory.csproj" />
+	</ItemGroup>
+	<ItemGroup Condition=" '$(Configuration)' == 'D.InM'">
+		<ProjectReference Include="..\Infrastructures\KiwiLoad.Infrastructure.InMemory\KiwiLoad.Infrastructure.InMemory.csproj" />
+	</ItemGroup>
+	<ItemGroup Condition=" '$(Configuration)' == 'R.SqlS'">
+		<ProjectReference Include="..\Infrastructures\KiwiLoad.Infrastructure.SqlServer\KiwiLoad.Infrastructure.SqlServer.csproj" />
+	</ItemGroup>
+	<ItemGroup Condition=" '$(Configuration)' == 'D.SqlS'">
+		<ProjectReference Include="..\Infrastructures\KiwiLoad.Infrastructure.SqlServer\KiwiLoad.Infrastructure.SqlServer.csproj" />
+	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\KiwiLoad.Infrastructure\KiwiLoad.Infrastructure.csproj" />
 	</ItemGroup>

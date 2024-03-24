@@ -45,7 +45,7 @@ public class LoginTest
         }
     }
     [Fact]
-    public async Task LoginV1NoUsername_Should_ReturnUnauthorized()
+    public async Task V1_NoUsername_Should_ReturnUnauthorized()
     {
         // Arrange
         var request = new HttpRequestMessage(HttpMethod.Post, BaseUrl);
@@ -64,7 +64,7 @@ public class LoginTest
     }
 
     [Fact]
-    public async Task LoginV1NoPassword_Should_ReturnUnauthorized()
+    public async Task V1_NoPassword_Should_ReturnUnauthorized()
     {
         // Arrange
         var request = new HttpRequestMessage(HttpMethod.Post, BaseUrl);
@@ -83,7 +83,7 @@ public class LoginTest
     }
 
     [Fact]
-    public async Task V1WrongPassword_Should_Authorized()
+    public async Task V1_WrongPassword_Should_Authorized()
     {
         // Arrange
         var request = new HttpRequestMessage(HttpMethod.Post, BaseUrl);
