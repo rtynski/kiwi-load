@@ -29,9 +29,11 @@
 	</ItemGroup>
 	<ItemGroup Condition=" '$(Configuration)' == 'R.SqlS'">
 		<ProjectReference Include="..\Infrastructures\KiwiLoad.Infrastructure.SqlServer\KiwiLoad.Infrastructure.SqlServer.csproj" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.3" />
 	</ItemGroup>
 	<ItemGroup Condition=" '$(Configuration)' == 'D.SqlS'">
 		<ProjectReference Include="..\Infrastructures\KiwiLoad.Infrastructure.SqlServer\KiwiLoad.Infrastructure.SqlServer.csproj" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.3" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\KiwiLoad.Infrastructure\KiwiLoad.Infrastructure.csproj" />

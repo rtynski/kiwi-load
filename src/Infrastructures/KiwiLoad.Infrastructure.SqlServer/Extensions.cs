@@ -16,7 +16,7 @@ public static class Extensions
     {
         _ = services.AddDbContext<KiwiDbContext>((options) =>
         {
-            options.UseSqlServer("KiwiLoad");
+            options.UseSqlServer("Server=mssql;Database=master;User Id=sa;Password=Password123;");
         }, ServiceLifetime.Transient);
 
         services.AddTransient<IAuthRepository, AuthRepository>();
