@@ -12,7 +12,7 @@ public partial class StocksController
     public async Task<IEnumerable<StockRes>> GetStocksV1([FromServices] IStocksService stocksService)
     {
         logger.LogInformation("{HttpMethod} {ActionName}", "GET", nameof(GetStocksV1));
-        var warehouses = await stocksService.GetAll();
-        return warehouses.Items.Select(x => new StockRes(x.Id));
+        var stocks = await stocksService.GetAll();
+        return stocks.Select(x => new StockRes(x.Id, x.Name));
     }
 }

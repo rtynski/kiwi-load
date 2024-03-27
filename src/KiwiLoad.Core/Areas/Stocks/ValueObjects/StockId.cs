@@ -1,4 +1,4 @@
-﻿using KiwiLoad.Core.Exceptions.Warehouses;
+﻿using KiwiLoad.Core.Exceptions.Stocks;
 using KiwiLoad.Core.Models;
 
 namespace KiwiLoad.Core.Areas.Stocks.ValueObjects;
@@ -10,7 +10,7 @@ public class StockId : ValueObject
     {
         if (value is null or <= 0)
         {
-            throw new KiwiLoadStockInvalidIdException(value);
+            throw new KiwiLoadStocksInvalidIdException(value);
         }
         Value = value.Value;
     }
