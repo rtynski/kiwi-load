@@ -2,7 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
 
 namespace KiwiLoad.Infrastructure.Databases;
-internal class KiwiDbContext : DbContext
+public class KiwiDbContext : DbContext
 {
     public KiwiDbContext(DbContextOptions<KiwiDbContext> options) : base(options)
     {
@@ -17,5 +17,7 @@ internal class KiwiDbContext : DbContext
 
         var currentAssembly = GetType().Assembly;
         _ = modelBuilder.ApplyConfigurationsFromAssembly(currentAssembly);
+
+        modelBuilder.HasDefaultSchema(Constants.SchemaName);
     }
 }

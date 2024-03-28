@@ -1,7 +1,7 @@
 ﻿using KiwiLoad.Infrastructure.Databases.Interfaces;
 
 namespace KiwiLoad.Infrastructure.Databases.Entries;
-internal class User : IDisableDate
+public class User : IDisableDate
 {
     public int Id { get; set; }
     public string Username { get; set; } = string.Empty;
