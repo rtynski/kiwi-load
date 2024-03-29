@@ -5,10 +5,8 @@ on:
   push:
   pull_request:
     branches: [ "main" ]
-
 jobs:
   build_InM:
-
     runs-on: ubuntu-latest
     
     steps:
@@ -22,7 +20,7 @@ jobs:
     - name: Build
       run: dotnet build --no-restore -c R.InM
     - name: Test
-      run: dotnet test --no-build -c R.InM --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:ExcludeByFile="**/*.Api/Program.cs"
+      run: dotnet test -c R.InM --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:ExcludeByFile="**/*.Api/Program.cs"
     - name: Upload coverage reports to Codecov
       if: github.event_name == 'push'
       shell: bash
@@ -34,9 +32,7 @@ jobs:
         echo $branch
         ./codecov -b $branch -f ./tests/KiwiLoad.Api.Tests/coverage.opencover.xml -t ${{ secrets.CODECOV_TOKEN }}
   build_SqlS:
-
     runs-on: ubuntu-latest
-
     services:
       mssql:
         image: mcr.microsoft.com/mssql/server:2022-latest
@@ -46,8 +42,6 @@ jobs:
           MSSQL_PID: Express
         ports:
           - 1433:1433
-
-    
     steps:
     - uses: actions/checkout@v3
     - name: Setup .NET
@@ -56,16 +50,14 @@ jobs:
         dotnet-version: 8.0.x
     - name: Install PowerShell (if not already available)
       run: |
-        if (! [ -x "$(command -v pwsh)" ]) {
+        if (! [ -x "$(command -v pwsh)" ])
           curl -sSL https://aka.ms/install-powershell | pwsh -ExecutionPolicy Bypass -NoProfile -InputFormat None
-        }
     - name: Test SQL Server Connection (using PowerShell)
       run: |
         $server = 'localhost'
         $database = 'master'
         $username = 'sa'
         $password = 'Password123'
-
         try {
           Test-Connection -ComputerName $server -Credential (New-Object System.Management.Automation.PSCredential ($username, (ConvertTo-SecureString $password -AsPlainText -Force))) -Force
           Write-Host "Connection to SQL Server successful!"

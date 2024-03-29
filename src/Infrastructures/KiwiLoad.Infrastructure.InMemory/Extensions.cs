@@ -1,10 +1,4 @@
-﻿using KiwiLoad.Core.Areas.Auth;
-using KiwiLoad.Core.Areas.Users;
-using KiwiLoad.Core.Areas.Warehouses;
-using KiwiLoad.Infrastructure.Databases;
-using KiwiLoad.Infrastructure.Repositories.Auth;
-using KiwiLoad.Infrastructure.Repositories.Users;
-using KiwiLoad.Infrastructure.Repositories.Warehouses;
+﻿using KiwiLoad.Infrastructure.Databases;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 

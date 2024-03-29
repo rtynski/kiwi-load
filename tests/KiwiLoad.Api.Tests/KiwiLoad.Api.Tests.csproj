@@ -42,4 +42,22 @@
 	<ItemGroup>
 		<Using Include="Xunit" />
 	</ItemGroup>
+
+	<ItemGroup Condition=" '$(Configuration)' == 'R.InM'">
+		<ProjectReference Include="..\..\src\Infrastructures\KiwiLoad.Infrastructure.InMemory\KiwiLoad.Infrastructure.InMemory.csproj" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.3" />
+	</ItemGroup>
+	<ItemGroup Condition=" '$(Configuration)' == 'D.InM'">
+		<ProjectReference Include="..\..\src\Infrastructures\KiwiLoad.Infrastructure.InMemory\KiwiLoad.Infrastructure.InMemory.csproj" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.3" />
+	</ItemGroup>
+	<ItemGroup Condition=" '$(Configuration)' == 'R.SqlS'">
+		<ProjectReference Include="..\..\src\Infrastructures\KiwiLoad.Infrastructure.SqlServer\KiwiLoad.Infrastructure.SqlServer.csproj" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.3" />
+	</ItemGroup>
+	<ItemGroup Condition=" '$(Configuration)' == 'D.SqlS'">
+		<ProjectReference Include="..\..\src\Infrastructures\KiwiLoad.Infrastructure.SqlServer\KiwiLoad.Infrastructure.SqlServer.csproj" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.3" />
+	</ItemGroup>
+	
 </Project>
