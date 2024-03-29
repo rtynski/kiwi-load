@@ -19,10 +19,8 @@ public static class Extensions
             options.UseInMemoryDatabase("KiwiLoad");
         }, ServiceLifetime.Transient);
 
-        services.AddTransient<IAuthRepository, AuthRepository>();
-        services.AddTransient<IUsersRepository, UsersRepository>();
-        services.AddTransient<IWarehouseRepository, WarehouseRepository>();
-
+        services.AddTransient<IDbContext, KiwiDbContext>();
+        services.AddInfrastructureBase();
         return services;
     }
 }

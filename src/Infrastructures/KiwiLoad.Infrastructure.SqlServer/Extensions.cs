@@ -1,10 +1,4 @@
-﻿using KiwiLoad.Core.Areas.Auth;
-using KiwiLoad.Core.Areas.Users;
-using KiwiLoad.Core.Areas.Warehouses;
-using KiwiLoad.Infrastructure.Databases;
-using KiwiLoad.Infrastructure.Repositories.Auth;
-using KiwiLoad.Infrastructure.Repositories.Users;
-using KiwiLoad.Infrastructure.Repositories.Warehouses;
+﻿using KiwiLoad.Infrastructure.Databases;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -19,9 +13,8 @@ public static class Extensions
             options.UseSqlServer("Server=mssql;Database=master;User Id=sa;Password=Password123;");
         }, ServiceLifetime.Transient);
 
-        services.AddTransient<IAuthRepository, AuthRepository>();
-        services.AddTransient<IUsersRepository, UsersRepository>();
-        services.AddTransient<IWarehouseRepository, WarehouseRepository>();
+        services.AddTransient<IDbContext, KiwiDbContext>();
+        services.AddInfrastructureBase();
 
         return services;
     }

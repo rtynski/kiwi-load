@@ -3,7 +3,7 @@
 namespace KiwiLoad.Infrastructure.Databases;
 public class KiwiDbContext : BaseKiwiDbContext
 {
-    public KiwiDbContext(DbContextOptions<BaseKiwiDbContext> options) : base(options)
+    public KiwiDbContext(DbContextOptions<KiwiDbContext> options) : base(options)
     {
     }
 }
