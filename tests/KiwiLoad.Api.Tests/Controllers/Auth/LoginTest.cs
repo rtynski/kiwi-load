@@ -38,10 +38,10 @@ public class LoginTest
         // Init in scoped
         using (var scope = server.Services.CreateScope())
         {
-            var db = scope.ServiceProvider.GetRequiredService<KiwiDbContext>();
+            var db = scope.ServiceProvider.GetRequiredService<IDbContext>();
             db.Database.EnsureDeleted();
             db.Users.Add(new User { Id = 1, Username = "admin", PasswordHash = "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918" });
-            db.SaveChanges();
+            db.SaveChangesAsync().Wait();
         }
     }
     [Fact]

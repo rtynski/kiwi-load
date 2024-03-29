@@ -37,9 +37,9 @@ public class LogoutTest
             var mc = scope.ServiceProvider.GetRequiredService<IMemoryCache>();
             mc.Set(Mt.Token, Mt.Username);
 
-            var db = scope.ServiceProvider.GetRequiredService<KiwiDbContext>();
+            var db = scope.ServiceProvider.GetRequiredService<IDbContext>();
             db.Database.EnsureDeleted();
-            db.SaveChanges();
+            db.SaveChangesAsync().Wait();
         }
     }
 

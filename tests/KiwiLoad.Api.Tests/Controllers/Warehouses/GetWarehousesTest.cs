@@ -41,9 +41,9 @@ public class GetWarehousesTest
             mc.Set(Mt.Token, Mt.Username);
 
             // Init db for test
-            var db = scope.ServiceProvider.GetRequiredService<KiwiDbContext>();
+            var db = scope.ServiceProvider.GetRequiredService<IDbContext>();
             db.Database.EnsureDeleted();
-            db.SaveChanges();
+            db.SaveChangesAsync().Wait();
         }
     }
 

@@ -43,10 +43,10 @@ public class GetWarehouseByIdTest
             mc.Set(Mt.Token, Mt.Username);
 
             // Init db for test
-            var db = scope.ServiceProvider.GetRequiredService<KiwiDbContext>();
+            var db = scope.ServiceProvider.GetRequiredService<IDbContext>();
             db.Database.EnsureDeleted();
             db.Warehouses.Add(new Warehouse { Id = 1, Name = "Test" });
-            db.SaveChanges();
+            db.SaveChangesAsync().Wait();
         }
     }
 
