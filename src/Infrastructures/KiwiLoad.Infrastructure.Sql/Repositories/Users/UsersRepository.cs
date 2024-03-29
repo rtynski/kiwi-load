@@ -8,9 +8,9 @@ using Microsoft.Extensions.Logging;
 namespace KiwiLoad.Infrastructure.Repositories.Users;
 internal class UsersRepository : IUsersRepository
 {
-    private readonly KiwiDbContext dbContext;
+    private readonly IDbContext dbContext;
     private readonly ILogger<UsersRepository> logger;
-    public UsersRepository(ILogger<UsersRepository> logger, KiwiDbContext dbContext)
+    public UsersRepository(ILogger<UsersRepository> logger, IDbContext dbContext)
     {
         this.logger=logger;
         this.dbContext=dbContext;

@@ -11,9 +11,9 @@ namespace KiwiLoad.Infrastructure.Repositories.Warehouses;
 internal class WarehouseRepository : IWarehouseRepository
 {
     private readonly ILogger<UsersRepository> logger;
-    private readonly KiwiDbContext dbContext;
+    private readonly IDbContext dbContext;
 
-    public WarehouseRepository(ILogger<UsersRepository> logger, KiwiDbContext dbContext)
+    public WarehouseRepository(ILogger<UsersRepository> logger, IDbContext dbContext)
     {
         this.logger=logger;
         this.dbContext=dbContext;
