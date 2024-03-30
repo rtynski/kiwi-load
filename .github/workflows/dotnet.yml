@@ -38,34 +38,28 @@ jobs:
         image: mcr.microsoft.com/mssql/server:2022-latest
         env:
           ACCEPT_EULA: "Y"
-          MSSQL_SA_PASSWORD: Password123
+          MSSQL_SA_PASSWORD: Password12!
           MSSQL_PID: Express
         ports:
           - 1433:1433
     steps:
     - uses: actions/checkout@v3
+    - name: Wait for MSSQL to be ready
+      run: |
+          until nc -z localhost 1433; do sleep 1; done
+          echo "MSSQL is ready"
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 8.0.x
-    - name: Install PowerShell (if not already available)
-      run: |
-        if (! [ -x "$(command -v pwsh)" ])
-          curl -sSL https://aka.ms/install-powershell | pwsh -ExecutionPolicy Bypass -NoProfile -InputFormat None
+    - name: Display Powershell information
+      run: pwsh --version
+    - name: Install SQL Server module
+      shell: pwsh
+      run: Install-Module -Name SqlServer -Force
     - name: Test SQL Server Connection (using PowerShell)
-      run: |
-        $server = 'localhost'
-        $database = 'master'
-        $username = 'sa'
-        $password = 'Password123'
-        try {
-          Test-Connection -ComputerName $server -Credential (New-Object System.Management.Automation.PSCredential ($username, (ConvertTo-SecureString $password -AsPlainText -Force))) -Force
-          Write-Host "Connection to SQL Server successful!"
-        }
-        catch {
-          Write-Error "Connection to SQL Server failed: $($_.Exception.Message)"
-          exit 1
-        }
+      shell: pwsh
+      run: Invoke-Sqlcmd  -ConnectionString "Data Source=localhost;User Id=sa;Password=Password12!;TrustServerCertificate=True" -Query "sp_who" | Format-Table
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
