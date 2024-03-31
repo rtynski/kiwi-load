@@ -59,7 +59,11 @@ jobs:
       run: Install-Module -Name SqlServer -Force
     - name: Test SQL Server Connection (using PowerShell)
       shell: pwsh
-      run: Invoke-Sqlcmd  -ConnectionString "Data Source=localhost;User Id=sa;Password=${{ secrets.MSSQL_PASSWORD }};TrustServerCertificate=True" -Query "EXEC sp_databases" | Format-Table
+      run: '
+        Invoke-Sqlcmd  -ConnectionString "Data Source=localhost;User Id=sa;Password=${{ secrets.MSSQL_PASSWORD }};TrustServerCertificate=True" -Query "EXEC sp_databases" | Format-Table;
+        Invoke-Sqlcmd  -ConnectionString "Data Source=localhost;User Id=sa;Password=${{ secrets.MSSQL_PASSWORD }};TrustServerCertificate=True" -Query "CREATE DATABASE ${{ secrets.MSSQL_DB_NAME }};" | Format-Table;
+        Invoke-Sqlcmd  -ConnectionString "Data Source=localhost;User Id=sa;Password=${{ secrets.MSSQL_PASSWORD }};TrustServerCertificate=True" -Query "EXEC sp_databases" | Format-Table;
+        '
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
