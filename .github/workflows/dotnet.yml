@@ -38,7 +38,7 @@ jobs:
         image: mcr.microsoft.com/mssql/server:2022-latest
         env:
           ACCEPT_EULA: "Y"
-          MSSQL_SA_PASSWORD: Password12!
+          MSSQL_SA_PASSWORD: ${{ secrets.MSSQL_PASSWORD }}
           MSSQL_PID: Express
         ports:
           - 1433:1433
@@ -59,7 +59,7 @@ jobs:
       run: Install-Module -Name SqlServer -Force
     - name: Test SQL Server Connection (using PowerShell)
       shell: pwsh
-      run: Invoke-Sqlcmd  -ConnectionString "Data Source=localhost;User Id=sa;Password=Password12!;TrustServerCertificate=True" -Query "sp_who" | Format-Table
+      run: Invoke-Sqlcmd  -ConnectionString "Data Source=localhost;User Id=sa;Password=${{ secrets.MSSQL_PASSWORD }};TrustServerCertificate=True" -Query "sp_who" | Format-Table
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
