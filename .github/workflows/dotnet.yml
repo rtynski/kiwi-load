@@ -70,3 +70,5 @@ jobs:
       run: dotnet build --no-restore -c R.SqlS
     - name: Test
       run: dotnet test --no-build -c R.SqlS
+      env:
+        ConnectionStrings__KiwiLoad: "Data Source=localhost;Initial Catalog=${{ secrets.MSSQL_DB_NAME }};User Id=sa;Password=${{ secrets.MSSQL_PASSWORD }};TrustServerCertificate=True"

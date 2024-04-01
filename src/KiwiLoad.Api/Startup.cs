@@ -13,6 +13,12 @@ public class Startup
 {
     private class SeedData { }
     private const string TokenScheme = nameof(TokenScheme);
+    private readonly IConfiguration configuration;
+
+    public Startup(IConfiguration configuration)
+    {
+        this.configuration=configuration;
+    }
     public void ConfigureServices(IServiceCollection services)
     {
         services
@@ -26,7 +32,7 @@ public class Startup
         services.AddControllers();
 
         services.AddApplication();
-        services.AddInfrastructure();
+        services.AddInfrastructure(configuration);
         services.AddCore();
 
         services.AddEndpointsApiExplorer();
