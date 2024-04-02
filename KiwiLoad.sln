@@ -39,7 +39,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KiwiLoad.Infrastructure.Sql
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Designs", "Designs", "{D64DF139-66C4-4DA9-A3D5-DFB235114088}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KiwiLoad.Infrastructure.SqlServerDesign", "KiwiLoad.Infrastructure.SqlServerDesign\KiwiLoad.Infrastructure.SqlServerDesign.csproj", "{378F0929-02BF-44AE-8C9A-F02D20B66297}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KiwiLoad.Infrastructure.SqlServerDesign", "src\Designs\KiwiLoad.Infrastructure.SqlServerDesign\KiwiLoad.Infrastructure.SqlServerDesign.csproj", "{378F0929-02BF-44AE-8C9A-F02D20B66297}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
