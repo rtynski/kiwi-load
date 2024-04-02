@@ -68,6 +68,13 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --no-restore -c R.SqlS
+    - name: Initialize Database
+      run: '
+        cd src/Designs/KiwiLoad.Infrastructure.SqlServerDesign
+        dotnet ef database update
+        '
+      env:
+        ConnectionStrings__KiwiLoad: "Data Source=localhost;Initial Catalog=${{ secrets.MSSQL_DB_NAME }};User Id=sa;Password=${{ secrets.MSSQL_PASSWORD }};TrustServerCertificate=True"
     - name: Test
       run: dotnet test --no-build -c R.SqlS
       env:
