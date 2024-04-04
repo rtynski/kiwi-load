@@ -9,7 +9,7 @@ internal class KiwiDbDesignContext : KiwiDbContext
     public KiwiDbDesignContext() : base(
         new DbContextOptionsBuilder<KiwiDbContext>()
                 .UseSqlServer(
-                    Environment.GetEnvironmentVariable("ConnectionStrings:KiwiLoad") ?? "",
+                    Environment.GetEnvironmentVariable("ConnectionStrings__KiwiLoad"),
                     x => x.MigrationsHistoryTable(Constants.MigrationsHistory, Constants.SchemaName)
                 )
                 .Options)
