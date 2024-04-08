@@ -27,3 +27,6 @@ Jednostką bazową będzie kontener.
     <img width="50%" src="https://codecov.io/gh/rtynski/kiwi-load/graphs/tree.svg?token=3URZFOZ7G1" alt="Pokrycie testami" />
 </p>
 
+## Cele dodatkowe
+Poznanie mechanizmów w github. Przetestowanie możliwości github actions.
+
